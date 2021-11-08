@@ -1,17 +1,27 @@
 """
-@author: Awwal Mohammed
-date: 06-11-21
-program title: main_routine.py
+* @author: Awwal Mohammed
+* date: 06-11-21
+* program title: main_routine.py
 
 description:
-This program is expected to carry out an operation such that given a number of pennies\
-will calculate the minimum number of Sterling coins equivalent to that amount.
+\t This program is expected to carry out an operation such that given a number of pennies
+ \t will calculate the minimum number of Sterling coins equivalent to that amount.
 """
 import math
 import re
 
 
 def get_coins(cur_val, signal):
+    """
+    get_coins(cur_val, signal) -> minimum coins
+
+    Return a string describing the minimum coins that represents cur_val.
+    The signal parameter allows pound coins and pennies to be treated uniquely.
+
+    :param cur_val: numeric monetary value corresponding with the user input.
+    :param signal: pound coin or pennies, allows for specialized arithmetic.
+    :return: a concatenated string containing the minimum coins required.
+    """
     one_pound = 0
     two_pounds = 0
     one_pennie = 0
@@ -53,6 +63,7 @@ def get_coins(cur_val, signal):
     return result
 
 
+# main loop
 while True:
     # input prompt
     print("ENTER PENNIES (e.g. £2, £1, 50p, 20p, 10p, 5p, 2p and 1p): ")
@@ -99,33 +110,36 @@ while True:
     user_input = user_input.replace('p', '') if is_pennies else user_input
     cur_pat = "(?:[\£\]{1}[,\d]+.?\d*)"  # regex pattern for finding currency or cash amount strings
 
-    # coin processing mechanism
-    try:
-        if is_pennies:
-            # logic for processing pennies
+    try:    # coin processing mechanism
+        if is_pennies:                      # e.g. 123p, 4p, 167p, etc.
             temp_input = user_input.replace('p', '')
             temp_input = round(float(temp_input), 2)
             user_input = '£' + str(temp_input)
             amount = re.search(cur_pat, user_input)[0].replace('£', '')
             print(str(copy_input), ' = ', get_coins(temp_input, signal='p'))
-        elif is_pounds or is_pound_pence:
-            # logic for processing pounds
+
+        elif is_pounds or is_pound_pence:   # e.g. £1.33, 6.235p, 001.61p
             if '£' in user_input:
                 temp_input = user_input.replace('£', '').replace('p', '')
                 temp_input = round(float(temp_input), 2)
                 user_input = '£' + str(temp_input)
                 amount = re.search(cur_pat, user_input)[0]
                 print(str(copy_input), ' = ', get_coins(temp_input, signal='£'))
-            else:
+
+            else:                           # e.g. 1.97, 10.75
                 temp_input = round(float(user_input.replace('p', '')), 2)
                 print(str(copy_input), ' = ', get_coins(temp_input, signal='£'))
-        elif is_sing_or_doub:
+
+        elif is_sing_or_doub:               # ...or more. e.g. 6, 75, etc.
             print(str(copy_input), ' = ', get_coins(int(user_input), signal='p'))
-        elif is_pound_decimal:
+
+        elif is_pound_decimal:              # e.g. £1.97p, £1.256532677p
             print(str(copy_input), ' = ', get_coins(round(float(user_input), 2), signal='£'))
-        elif is_missing_pence:
+
+        elif is_missing_pence:              # e.g. £1.p, £.75p
             temp_input = round(float(user_input.replace('p', '').replace('£', '')), 2)
             print(str(copy_input), ' = ', get_coins(temp_input, signal='£'))
+
         print()
     except Exception as e:
         pass
