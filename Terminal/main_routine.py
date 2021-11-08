@@ -125,7 +125,6 @@ while True:
                 user_input = '£' + str(temp_input)
                 amount = re.search(cur_pat, user_input)[0]
                 print(str(copy_input), ' = ', get_coins(temp_input, signal='£'))
-
             else:                           # e.g. 1.97, 10.75
                 temp_input = round(float(user_input.replace('p', '')), 2)
                 print(str(copy_input), ' = ', get_coins(temp_input, signal='£'))
