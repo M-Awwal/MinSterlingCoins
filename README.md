@@ -22,18 +22,6 @@ This version of the minimum coin problem processes the following Sterling coins 
     <td>1p</td>
  </tr>
 </table>
-<style>
-    tr {
-        background-color: #efefef;
-    }
-    tr:hover {
-        background-color: #c3e6e5;
-    }
-    td:hover {
-        background-color: khaki;
-        cursor: pointer;
-    }
-</style>
 
 The evaluation process begins with basic filtering to account for input validation. This is subsequently followed by a bit of dynamic programming where the input is parsed through a top-down divisional minimization, starting with the highest coin.
 
