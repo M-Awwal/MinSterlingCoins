@@ -54,7 +54,7 @@ The evaluation process begins with basic filtering to account for input validati
 The result is returned in a string (iterated and concatenated from a dictionary counter) describing the minimum number of coins used, based on the given input.
 
 ### How to Run
-* The proram utilizes the following dependencies (all obtaininable via `pip`) for Terminal rich text design:
+* The program utilizes the following dependencies (all obtaininable via `pip`) for Terminal rich text design:
   * [termcolor](https://pypi.org/project/termcolor/)
   * [pyfiglet](https://pypi.org/project/pyfiglet/0.7/)
   * [rich (Rich API)](https://github.com/willmcgugan/rich)
