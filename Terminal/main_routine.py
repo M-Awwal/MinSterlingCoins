@@ -5,7 +5,7 @@
 
 description:
 \t This program is expected to carry out an operation such that given a number of pennies
- \t will calculate the minimum number of Sterling coins equivalent to that amount.
+\t will calculate the minimum number of Sterling coins equivalent to that amount.
 """
 import math
 import re
@@ -15,14 +15,15 @@ from terminal_graphics import MinSterlingTerminal
 
 def get_coins(cur_val, signal):
     """
-    get_coins(cur_val, signal) -> minimum coins
+    get_coins(cur_val, signal) -> [minimum coins, coins map]
 
-    Return a string describing the minimum coins that represents cur_val.
+    Return an array containing a string describing the minimum coins that represents cur_val,
+    and a dictionary that indexes the number of coins produced.
     The signal parameter allows pound coins and pennies to be treated uniquely.
 
     :param cur_val: numeric monetary value corresponding with the user input.
     :param signal: pound coin or pennies, allows for specialized arithmetic.
-    :return: a concatenated string containing the minimum coins required.
+    :return: a list containing a string and a dictionary, both describing the minimum coins.
     """
     one_pound = 0
     two_pounds = 0
@@ -66,7 +67,7 @@ def get_coins(cur_val, signal):
     return results
 
 
-# add designs to the terminal
+# display welcome message ASCII banner
 terminal = MinSterlingTerminal()
 terminal.show_welcome_msg()
 
@@ -136,7 +137,7 @@ while True:
                 print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
                 terminal.show_result_table(
                     user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
-            else:                           # e.g. 1.97, 10.75
+            else:                           # e.g. 1.97, 10.75, 0.56, etc.
                 temp_input = round(float(user_input.replace('p', '')), 2)
                 print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
                 terminal.show_result_table(
@@ -147,16 +148,16 @@ while True:
             terminal.show_result_table(
                 user_input=copy_input, data=get_coins(int(user_input), signal='p')[1])
 
-        elif is_pound_decimal:              # e.g. £1.97p, £1.256532677p
+        elif is_pound_decimal:              # e.g. £1.97p, £1.256532677p, etc.
             print(str(copy_input), ' = ', get_coins(round(float(user_input), 2), signal='£')[0])
             terminal.show_result_table(
                 user_input=copy_input, data=get_coins(round(float(user_input), 2), signal='£')[1])
 
-        elif is_missing_pence:              # e.g. £1.p, £.75p
+        elif is_missing_pence:              # e.g. £1.p, £.75p, etc.
             temp_input = round(float(user_input.replace('p', '').replace('£', '')), 2)
             print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
             terminal.show_result_table(user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
-        else:
+        else:   # invalid input -> just print 0
             print(0)
         print()
     except Exception:
