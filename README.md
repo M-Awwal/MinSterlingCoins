@@ -1,10 +1,36 @@
 # Minimum Sterling Coins and Pennies Evaluator
 
-### The minimum coin problem (with a twist!)
+##### The minimum coin problem (with a twist!)
 
 A simple repo for a program such that given a number of pennies, will calculate the minimum number of Sterling coins equivalent to that amount.
 
-#### How it works
+```
+__        __   _                            _        
+\ \      / /__| | ___ ___  _ __ ___   ___  | |_ ___  
+ \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ 
+  \ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) |
+   \_/\_/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/ 
+                                                     
+ __  __ _       _                           
+|  \/  (_)_ __ (_)_ __ ___  _   _ _ __ ___  
+| |\/| | | '_ \| | '_ ` _ \| | | | '_ ` _ \ 
+| |  | | | | | | | | | | | | |_| | | | | | |
+|_|  |_|_|_| |_|_|_| |_| |_|\__,_|_| |_| |_|
+                                            
+ ____  _            _ _                ____      _       
+/ ___|| |_ ___ _ __| (_)_ __   __ _   / ___|___ (_)_ __  
+\___ \| __/ _ \ '__| | | '_ \ / _` | | |   / _ \| | '_ \ 
+ ___) | ||  __/ |  | | | | | | (_| | | |__| (_) | | | | |
+|____/ \__\___|_|  |_|_|_| |_|\__, |  \____\___/|_|_| |_|
+                              |___/                      
+ _____            _             _             _ 
+| ____|_   ____ _| |_   _  __ _| |_ ___  _ __| |
+|  _| \ \ / / _` | | | | |/ _` | __/ _ \| '__| |
+| |___ \ V / (_| | | |_| | (_| | || (_) | |  |_|
+|_____| \_/ \__,_|_|\__,_|\__,_|\__\___/|_|  (_)
+```
+
+### How it works
 
 This version of the minimum coin problem processes the following Sterling coins and Pennies:
 
@@ -27,10 +53,17 @@ The evaluation process begins with basic filtering to account for input validati
 
 The result is returned in a string (iterated and concatenated from a dictionary counter) describing the minimum number of coins used, based on the given input.
 
-#### How to Run
+### How to Run
+* The proram utilizes the following dependencies (all obtaininable via `pip`) for Terminal rich text design:
+  * [termcolor](https://pypi.org/project/termcolor/)
+  * [pyfiglet](https://pypi.org/project/pyfiglet/0.7/)
+  * [rich (Rich API)](https://github.com/willmcgugan/rich)
 
-* From the ```Terminal``` directory, execute the ```main_routine.py``` file.
-* The program should display the following in a console/terminal:
+
+* With the dependencies installed, from the ```Terminal``` directory, execute the ```main_routine.py``` file.
+
+
+* The program should display the following (after the intial welcome message ASCII banner) in a console/terminal:
     * ```commandline 
       ENTER PENNIES (e.g. £2, £1, 50p, 20p, 10p, 5p, 2p and 1p):```
 * Given the following input (£14.83), the corresponding output is produced:
@@ -39,8 +72,33 @@ The result is returned in a string (iterated and concatenated from a dictionary 
       £14.83  
       >>> £14.83 =  7 x £2, 1 x 50p, 1 x 20p, 1 x 10p, 1 x 2p, 1 x 1p
     ```
+* Subsequent tabluation within the console is also added to mimic the feel and look of a web app:
+  * <table border="0">
+     <tr>
+        <td><code>Date & Time Received</code></td>
+        <td><code>Amount Received</code></td>
+        <td><code>Coin(s) Processed</code></td>
+     </tr>
+     <tr>
+        <td><code>Tue Nov  9 17:58:56 2021</code></td>
+        <td><code>£14.83</code></td>
+        <td><code>12</code></td>
+     </tr>
+    </table>
+  * <table border="0">
+     <tr>
+        <td><code>7 £2 Coins</code></td>
+        <td><code>1 50p Coin</code></td>
+        <td><code>1 20p Coin</code></td>
+        <td><code>1 10p Coin</code></td>
+        <td><code>1 2p Coin</code></td>
+        <td><code>1 1p Coin</code></td>
+     </tr>
+     
+    </table>
 
-#### Test Data
+  
+### Test Data
 
 In the first column is a string of user input, 
 and in the second the desired integer expressed as pence.

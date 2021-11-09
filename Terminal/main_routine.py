@@ -10,7 +10,7 @@ description:
 import math
 import re
 
-from OpenMedical.MinSterlingCoins.Terminal.terminal_graphics import MinSterlingTerminal
+from terminal_graphics import MinSterlingTerminal
 
 
 def get_coins(cur_val, signal):
