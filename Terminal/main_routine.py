@@ -10,6 +10,8 @@ description:
 import math
 import re
 
+from OpenMedical.MinSterlingCoins.Terminal.terminal_graphics import MinSterlingTerminal
+
 
 def get_coins(cur_val, signal):
     """
@@ -59,9 +61,14 @@ def get_coins(cur_val, signal):
         if coins[c] != 0:
             result += str(coins[c]) + ' x ' + c + ', '
     result = result[:-1] if result.endswith(', ') or result.endswith(',') else result
+    results = [result, coins]
 
-    return result
+    return results
 
+
+# add designs to the terminal
+terminal = MinSterlingTerminal()
+terminal.show_welcome_msg()
 
 # main loop
 while True:
@@ -116,7 +123,9 @@ while True:
             temp_input = round(float(temp_input), 2)
             user_input = '£' + str(temp_input)
             amount = re.search(cur_pat, user_input)[0].replace('£', '')
-            print(str(copy_input), ' = ', get_coins(temp_input, signal='p'))
+            print(str(copy_input), ' = ', get_coins(temp_input, signal='p')[0])
+            terminal.show_result_table(     # describe coins in a terminal table
+                user_input=copy_input, data=get_coins(temp_input, signal='p')[1])
 
         elif is_pounds or is_pound_pence:   # e.g. £1.33, 6.235p, 001.61p
             if '£' in user_input:
@@ -124,21 +133,31 @@ while True:
                 temp_input = round(float(temp_input), 2)
                 user_input = '£' + str(temp_input)
                 amount = re.search(cur_pat, user_input)[0]
-                print(str(copy_input), ' = ', get_coins(temp_input, signal='£'))
+                print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
+                terminal.show_result_table(
+                    user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
             else:                           # e.g. 1.97, 10.75
                 temp_input = round(float(user_input.replace('p', '')), 2)
-                print(str(copy_input), ' = ', get_coins(temp_input, signal='£'))
+                print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
+                terminal.show_result_table(
+                    user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
 
-        elif is_sing_or_doub:               # ...or more. e.g. 6, 75, etc.
-            print(str(copy_input), ' = ', get_coins(int(user_input), signal='p'))
+        elif is_sing_or_doub:  # ...or more. # e.g. 6, 75, etc.
+            print(str(copy_input), ' = ', get_coins(int(user_input), signal='p')[0])
+            terminal.show_result_table(
+                user_input=copy_input, data=get_coins(int(user_input), signal='p')[1])
 
         elif is_pound_decimal:              # e.g. £1.97p, £1.256532677p
-            print(str(copy_input), ' = ', get_coins(round(float(user_input), 2), signal='£'))
+            print(str(copy_input), ' = ', get_coins(round(float(user_input), 2), signal='£')[0])
+            terminal.show_result_table(
+                user_input=copy_input, data=get_coins(round(float(user_input), 2), signal='£')[1])
 
         elif is_missing_pence:              # e.g. £1.p, £.75p
             temp_input = round(float(user_input.replace('p', '').replace('£', '')), 2)
-            print(str(copy_input), ' = ', get_coins(temp_input, signal='£'))
-
+            print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
+            terminal.show_result_table(user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
+        else:
+            print(0)
         print()
-    except Exception as e:
+    except Exception:
         pass
