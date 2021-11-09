@@ -64,8 +64,9 @@ The result is returned in a string (iterated and concatenated from a dictionary 
 
 
 * The program should display the following (after the intial welcome message ASCII banner) in a console/terminal:
-    * ```commandline 
-      ENTER PENNIES (e.g. £2, £1, 50p, 20p, 10p, 5p, 2p and 1p):```
+    * ``` 
+      ENTER PENNIES (e.g. £2, £1, 50p, 20p, 10p, 5p, 2p and 1p):
+      ```
 * Given the following input (£14.83), the corresponding output is produced:
   * ```commandline 
       ENTER PENNIES (e.g. £2, £1, 50p, 20p, 10p, 5p, 2p and 1p):
