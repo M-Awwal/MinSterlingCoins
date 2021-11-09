@@ -41,7 +41,7 @@ class MinSterlingTerminal:
         table = Table(show_header=True, header_style="bold magenta")
         coins_table = Table(show_header=True, header_style="bold cyan")
 
-        table.add_column("Datet & Time Received", style="dim")
+        table.add_column("Date & Time Received", style="dim")
         table.add_column("Amount Received")
         table.add_column("Coin(s) Processed")
         table.add_row(
