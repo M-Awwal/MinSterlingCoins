@@ -25,14 +25,6 @@ def get_coins(cur_val, signal):
     :param signal: pound coin or pennies, allows for specialized arithmetic.
     :return: a list containing a string and a dictionary, both describing the minimum coins.
     """
-    one_pound = 0
-    two_pounds = 0
-    one_pennie = 0
-    two_pennies = 0
-    five_pennies = 0
-    ten_pennies = 0
-    twenty_pennies = 0
-    fifty_pennies = 0
 
     cur_val = round(cur_val * 100, 2) if signal is '£' else cur_val
 
