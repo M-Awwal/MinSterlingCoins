@@ -9,8 +9,11 @@ description:
 """
 import math
 import re
-
 from terminal_graphics import MinSterlingTerminal
+
+# display welcome message ASCII banner
+terminal = MinSterlingTerminal()
+terminal.show_welcome_msg()
 
 
 def get_coins(cur_val, signal):
@@ -59,10 +62,6 @@ def get_coins(cur_val, signal):
     return results
 
 
-# display welcome message ASCII banner
-terminal = MinSterlingTerminal()
-terminal.show_welcome_msg()
-
 # main loop
 while True:
     # input prompt
@@ -72,13 +71,8 @@ while True:
     user_input = input().__str__().lower()
     copy_input = user_input
 
-    is_pennies = False
-    is_pounds = False
-    is_pound_pence = False
-    is_sing_or_doub = False
-    is_pound_decimal = False
-    is_missing_pence = False
-    is_sing_dig_pound = False
+    is_pennies = is_pounds = is_pound_pence = is_sing_or_doub = \
+        is_pound_decimal = is_missing_pence = is_sing_dig_pound = False
 
     is_pennies = True if \
         user_input.endswith('p') and '.' not in user_input and \
@@ -101,11 +95,7 @@ while True:
         is_sing_or_doub = False
     is_missing_pence = True if '£' in user_input and 'p' in user_input and '.' not in user_input else False
     if is_missing_pence:
-        is_pennies = False
-        is_pounds = False
-        is_pound_pence = False
-        is_sing_or_doub = False
-        is_pound_decimal = False
+        is_pennies = is_pounds = is_pound_pence = is_sing_or_doub = is_pound_decimal = False
 
     user_input = user_input.replace('p', '') if is_pennies else user_input
     cur_pat = "(?:[\£\]{1}[,\d]+.?\d*)"  # regex pattern for finding currency or cash amount strings
