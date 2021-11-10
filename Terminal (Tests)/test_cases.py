@@ -127,16 +127,58 @@ except Exception as e:
     logging.debug(e)
     logging.info(e)
 
-try:  # Test Case 17, Input: £1x.0p
-    test_skeleton.main('£1x.0p')
-    print(f"Test Case 17 Passed, Input: {'£1x.0p'}")
+try:  # Test Case 17, Additional Test Input: .45
+    test_skeleton.main('.45')
+    print(f"Test Case 17 Passed, Input: {'.45'}")
 except Exception as e:
     logging.debug(e)
     logging.info(e)
 
-try:  # Test Case 18, Input: £p
+try:  # Test Case 18, Additional Test Input: £.89
+    test_skeleton.main('£.89')
+    print(f"Test Case 18 Passed, Input: {'£.89'}")
+except Exception as e:
+    logging.debug(e)
+    logging.info(e)
+
+try:  # Test Case 19, Invalid Input: £1x.0p
+    test_skeleton.main('£1..0p')
+    print(f"Test Case 19 Passed, Invalid Input: {'£1..0p'}")
+except Exception as e:
+    logging.debug(e)
+    logging.info(e)
+
+try:  # Test Case 20, Invalid Input: £p
+    test_skeleton.main('..p')
+    print(f"Test Case 20 Passed, Invalid Input: {'..p'}")
+except Exception as e:
+    logging.debug(e)
+    logging.info(e)
+
+try:  # Test Case 21, Invalid Input: AxY
+    test_skeleton.main('AxY')
+    print(f"Test Case 21 Passed, Invalid Input: {'AxY'}")
+except Exception as e:
+    logging.debug(e)
+    logging.info(e)
+
+try:  # Test Case 22, Invalid Input: *_/+-
+    test_skeleton.main('*_/+-')
+    print(f"Test Case 22 Passed, Invalid Input: {'*_/+-'}")
+except Exception as e:
+    logging.debug(e)
+    logging.info(e)
+
+try:  # Test Case 23, Invalid Input: £1x.0p
+    test_skeleton.main('£1x.0p')
+    print(f"Test Case 19 Passed via Caught Exception, Invalid Input: {'£1x.0p'}")
+except Exception as e:
+    logging.debug(e)
+    logging.info(e)
+
+try:  # Test Case 24, Invalid Input: £p
     test_skeleton.main('£p')
-    print(f"Test Case 18 Passed, Input: {'£p'}")
+    print(f"Test Case 24 Passed via Caught Exception, Invalid Input: {'£p'}")
 except Exception as e:
     logging.debug(e)
     logging.info(e)
