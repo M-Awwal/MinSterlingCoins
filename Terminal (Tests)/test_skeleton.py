@@ -14,7 +14,6 @@ description:
 import logging
 import math
 import re
-
 import test_terminal_graphics
 
 
@@ -58,13 +57,8 @@ def main(data):
     user_input = data.__str__().lower()
     copy_input = user_input
 
-    is_pennies = False
-    is_pounds = False
-    is_pound_pence = False
-    is_sing_or_doub = False
-    is_pound_decimal = False
-    is_missing_pence = False
-    is_sing_dig_pound = False
+    is_pennies = is_pounds = is_pound_pence = is_sing_or_doub = \
+        is_pound_decimal = is_missing_pence = is_sing_dig_pound = False
 
     is_pennies = True if \
         user_input.endswith('p') and '.' not in user_input and \
@@ -79,21 +73,17 @@ def main(data):
             float(user_input.replace('£', ''))
             is_pounds = True
     except Exception as e:
-        logging.debug(e, ": test_skeleton.py > line 76-82 > encountered while testing for pounds.")
+        logging.debug(e, ": test_skeleton.py > line 72-78 > encountered while testing for pounds.")
         is_pounds = False
     try:
         int(user_input.replace('£', ''))
         is_sing_or_doub = True if not is_pennies and '£' not in user_input and not is_pounds else False
     except Exception as e:
-        logging.debug(e, ": test_skeleton.py > line 84-89 > encountered while testing for single/double.")
+        logging.debug(e, ": test_skeleton.py > line 79-84 > encountered while testing for single/double.")
         is_sing_or_doub = False
     is_missing_pence = True if '£' in user_input and 'p' in user_input and '.' not in user_input else False
     if is_missing_pence:
-        is_pennies = False
-        is_pounds = False
-        is_pound_pence = False
-        is_sing_or_doub = False
-        is_pound_decimal = False
+        is_pennies = is_pounds = is_pound_pence = is_sing_or_doub = is_pound_decimal = False
 
     user_input = user_input.replace('p', '') if is_pennies else user_input
     cur_pat = "(?:[\£\]{1}[,\d]+.?\d*)"  # regex pattern for finding currency or cash amount strings
