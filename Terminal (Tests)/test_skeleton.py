@@ -101,12 +101,15 @@ def main(data):
 
     elif is_pounds or is_pound_pence:  # e.g. £1.33, 6.235p, 001.61p
         if '£' in user_input:
-            temp_input = user_input.replace('£', '').replace('p', '')
-            temp_input = round(float(temp_input), 2)
-            '£' + str(temp_input)
-            print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
-            return terminal.show_result_table(
-                user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
+            try:
+                temp_input = user_input.replace('£', '').replace('p', '')
+                temp_input = round(float(temp_input), 2)
+                '£' + str(temp_input)
+                print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
+                return terminal.show_result_table(
+                    user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
+            except:
+                return print(0)
         else:  # e.g. 1.97, 10.75, 0.56, etc.
             temp_input = round(float(user_input.replace('p', '')), 2)
             print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
@@ -124,8 +127,11 @@ def main(data):
             user_input=copy_input, data=get_coins(round(float(user_input), 2), signal='£')[1])
 
     elif is_missing_pence:  # e.g. £1.p, £.75p, etc.
-        temp_input = round(float(user_input.replace('p', '').replace('£', '')), 2)
-        print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
-        return terminal.show_result_table(user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
+        try:
+            temp_input = round(float(user_input.replace('p', '').replace('£', '')), 2)
+            print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
+            return terminal.show_result_table(user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
+        except:
+            return print(0)
 
     return print(0)
