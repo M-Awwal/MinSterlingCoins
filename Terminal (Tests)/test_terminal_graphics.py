@@ -38,4 +38,4 @@ class MinSterlingTerminal:
             if data[c] != 0:
                 coins_table.add_column(f"{data[c]} {c} {'Coins' if data[c]>1 else 'Coin'}", style="dim")
         console.print(table)
-        console.print(coins_table)
+        console.print(coins_table, '\n')
