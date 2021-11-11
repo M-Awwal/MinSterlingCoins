@@ -62,8 +62,8 @@ def get_coins(cur_val, signal):
     return results
 
 
-# main loop
-while True:
+# main routine
+def main():
     # input prompt
     print("ENTER PENNIES (e.g. £2, £1, 50p, 20p, 10p, 5p, 2p and 1p): ")
 
@@ -100,47 +100,51 @@ while True:
     user_input = user_input.replace('p', '') if is_pennies else user_input
     cur_pat = "(?:[\£\]{1}[,\d]+.?\d*)"  # regex pattern for finding currency or cash amount strings
 
-    try:    # coin processing mechanism
-        if is_pennies:                      # e.g. 123p, 4p, 167p, etc.
+    try:  # coin processing mechanism
+        if is_pennies:  # e.g. 123p, 4p, 167p, etc.
             temp_input = user_input.replace('p', '')
             temp_input = round(float(temp_input), 2)
             user_input = '£' + str(temp_input)
             amount = re.search(cur_pat, user_input)[0].replace('£', '')
             print(str(copy_input), ' = ', get_coins(temp_input, signal='p')[0])
-            terminal.show_result_table(     # describe coins in a terminal table
+            return terminal.show_result_table(  # describe coins in a terminal table
                 user_input=copy_input, data=get_coins(temp_input, signal='p')[1])
 
-        elif is_pounds or is_pound_pence:   # e.g. £1.33, 6.235p, 001.61p
+        elif is_pounds or is_pound_pence:  # e.g. £1.33, 6.235p, 001.61p
             if '£' in user_input:
                 temp_input = user_input.replace('£', '').replace('p', '')
                 temp_input = round(float(temp_input), 2)
                 user_input = '£' + str(temp_input)
                 amount = re.search(cur_pat, user_input)[0]
                 print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
-                terminal.show_result_table(
+                return terminal.show_result_table(
                     user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
-            else:                           # e.g. 1.97, 10.75, 0.56, etc.
+            else:  # e.g. 1.97, 10.75, 0.56, etc.
                 temp_input = round(float(user_input.replace('p', '')), 2)
                 print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
-                terminal.show_result_table(
+                return terminal.show_result_table(
                     user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
 
         elif is_sing_or_doub:  # ...or more. # e.g. 6, 75, etc.
             print(str(copy_input), ' = ', get_coins(int(user_input), signal='p')[0])
-            terminal.show_result_table(
+            return terminal.show_result_table(
                 user_input=copy_input, data=get_coins(int(user_input), signal='p')[1])
 
-        elif is_pound_decimal:              # e.g. £1.97p, £1.256532677p, etc.
+        elif is_pound_decimal:  # e.g. £1.97p, £1.256532677p, etc.
             print(str(copy_input), ' = ', get_coins(round(float(user_input), 2), signal='£')[0])
-            terminal.show_result_table(
+            return terminal.show_result_table(
                 user_input=copy_input, data=get_coins(round(float(user_input), 2), signal='£')[1])
 
-        elif is_missing_pence:              # e.g. £1.p, £.75p, etc.
+        elif is_missing_pence:  # e.g. £1.p, £.75p, etc.
             temp_input = round(float(user_input.replace('p', '').replace('£', '')), 2)
             print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
-            terminal.show_result_table(user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
-        else:   # invalid input -> just print 0
-            print(0)
-        print()
+            return terminal.show_result_table(user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
+
+        return print(0)  # invalid input -> just print 0
     except Exception:
-        pass
+        print(0)
+
+
+# main loop
+while True:
+    main()
