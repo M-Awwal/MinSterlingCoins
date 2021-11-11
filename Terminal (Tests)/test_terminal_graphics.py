@@ -7,11 +7,10 @@ description:
 \t A shadow of the terminal_graphics.py class, specifically for testing purposes.
 """
 
-from termcolor import colored
+from time import ctime
 from pyfiglet import Figlet
 from rich.console import Console
 from rich.table import Table
-from time import ctime
 
 
 class MinSterlingTerminal:
