@@ -105,17 +105,17 @@ try:  # Test Case 14, Input: £1.256532677p
 except Exception as e:
     logging.info(msg='Test Case 14: Input: £1.256532677p', exc_info=e)
 
-try:  # Test Case 15, Input:
+try:  # Test Case 15, Invalid Input: <empty string>
     test_skeleton.main('')
-    print(f"Test Case 15 Passed, Input: {''}")
+    print(f"Test Case 15 Passed, Invalid Input: {''}")
 except Exception as e:
-    logging.info(msg='Test Case 15: Input: ', exc_info=e)
+    logging.info(msg='Test Case 15: Invalid Input: <empty string>', exc_info=e)
 
-try:  # Test Case 16, Input: 1x
+try:  # Test Case 16, Invalid Input: 1x
     test_skeleton.main('1x')
-    print(f"Test Case 16 Passed, Input: {'1x'}")
+    print(f"Test Case 16 Passed, Invalid Input: {'1x'}")
 except Exception as e:
-    logging.info(msg='Test Case 16: Input: 1x', exc_info=e)
+    logging.info(msg='Test Case 16: Invalid Input: 1x', exc_info=e)
 
 try:  # Test Case 17, Additional Test Input: .45
     test_skeleton.main('.45')
@@ -133,34 +133,34 @@ try:  # Test Case 19, Invalid Input: £1..0p
     test_skeleton.main('£1..0p')
     print(f"Test Case 19 Passed, Invalid Input: {'£1..0p'}")
 except Exception as e:
-    logging.info(msg='Test Case 19: Input: £1..0p', exc_info=e)
+    logging.info(msg='Test Case 19: Invalid Input: £1..0p', exc_info=e)
 
 try:  # Test Case 20, Invalid Input: ..p
     test_skeleton.main('..p')
     print(f"Test Case 20 Passed, Invalid Input: {'..p'}")
 except Exception as e:
-    logging.info(msg='Test Case 20: Input: ..p', exc_info=e)
+    logging.info(msg='Test Case 20: Invalid Input: ..p', exc_info=e)
 
 try:  # Test Case 21, Invalid Input: AxY
     test_skeleton.main('AxY')
     print(f"Test Case 21 Passed, Invalid Input: {'AxY'}")
 except Exception as e:
-    logging.info(msg='Test Case 21: Input: AxY', exc_info=e)
+    logging.info(msg='Test Case 21: Invalid Input: AxY', exc_info=e)
 
 try:  # Test Case 22, Invalid Input: *_/+-
     test_skeleton.main('*_/+-')
     print(f"Test Case 22 Passed, Invalid Input: {'*_/+-'}")
 except Exception as e:
-    logging.info(msg='Test Case 22: Input: *_/+-', exc_info=e)
+    logging.info(msg='Test Case 22: Invalid Input: *_/+-', exc_info=e)
 
 try:  # Test Case 23, Invalid Input: £1x.0p
     test_skeleton.main('£1x.0p')
     print(f"Test Case 23 Passed via Caught Exception, Invalid Input: {'£1x.0p'}")
 except Exception as e:
-    logging.info(msg='Test Case 23: Input: £1x.0p', exc_info=e)
+    logging.info(msg='Test Case 23: Invalid Input: £1x.0p', exc_info=e)
 
 try:  # Test Case 24, Invalid Input: £p
     test_skeleton.main('£p')
     print(f"Test Case 24 Passed via Caught Exception, Invalid Input: {'£p'}")
 except Exception as e:
-    logging.info(msg='Test Case 24: Input: £p', exc_info=e)
+    logging.info(msg='Test Case 24: Invalid Input: £p', exc_info=e)
