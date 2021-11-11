@@ -138,11 +138,12 @@ def main():
         elif is_missing_pence:  # e.g. £1.p, £.75p, etc.
             temp_input = round(float(user_input.replace('p', '').replace('£', '')), 2)
             print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
-            return terminal.show_result_table(user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
+            return terminal.show_result_table(
+                user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
 
-        return print(0)  # invalid input -> just print 0
+        return print(0)         # invalid input -> just print 0
     except Exception:
-        print(0)
+        print(0)                # caught exception -> just print 0
 
 
 # main loop
