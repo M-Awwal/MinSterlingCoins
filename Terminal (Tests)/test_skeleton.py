@@ -8,9 +8,10 @@ description:
 \t which in turn performs individual explicit tests based on
 \t the provided test data (refer to README.md).
 \t As you'll see, this source file contains segments of code identical to main_routine.py.
-\t Elaborate comments are ignored, but can be referenced from the main_routine.py.
+\t Elaborate comments are ignored, but can be referenced from main_routine.py.
 
 """
+import inspect
 import logging
 import math
 import re
@@ -73,13 +74,13 @@ def main(data):
             float(user_input.replace('£', ''))
             is_pounds = True
     except Exception as e:
-        logging.debug(e, ": test_skeleton.py > line 72-78 > encountered while testing for pounds.")
+        logging.debug(e, f": {__file__} > line {inspect.currentframe().f_lineno} > encountered while testing for pounds.")
         is_pounds = False
     try:
         int(user_input.replace('£', ''))
         is_sing_or_doub = True if not is_pennies and '£' not in user_input and not is_pounds else False
     except Exception as e:
-        logging.debug(e, ": test_skeleton.py > line 79-84 > encountered while testing for single/double.")
+        logging.debug(e, f": {__file__} > line {inspect.currentframe().f_lineno} > encountered while testing for single/double.")
         is_sing_or_doub = False
     is_missing_pence = True if '£' in user_input and 'p' in user_input and '.' not in user_input else False
     if is_missing_pence:
@@ -95,7 +96,7 @@ def main(data):
         user_input = '£' + str(temp_input)
         re.search(cur_pat, user_input)[0].replace('£', '')
         print(str(copy_input), ' = ', get_coins(temp_input, signal='p')[0])
-        terminal.show_result_table(  # describe coins in a terminal table
+        return terminal.show_result_table(  # describe coins in a terminal table
             user_input=copy_input, data=get_coins(temp_input, signal='p')[1])
 
     elif is_pounds or is_pound_pence:  # e.g. £1.33, 6.235p, 001.61p
@@ -104,28 +105,27 @@ def main(data):
             temp_input = round(float(temp_input), 2)
             '£' + str(temp_input)
             print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
-            terminal.show_result_table(
+            return terminal.show_result_table(
                 user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
         else:  # e.g. 1.97, 10.75, 0.56, etc.
             temp_input = round(float(user_input.replace('p', '')), 2)
             print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
-            terminal.show_result_table(
+            return terminal.show_result_table(
                 user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
 
     elif is_sing_or_doub:  # ...or more. # e.g. 6, 75, etc.
         print(str(copy_input), ' = ', get_coins(int(user_input), signal='p')[0])
-        terminal.show_result_table(
+        return terminal.show_result_table(
             user_input=copy_input, data=get_coins(int(user_input), signal='p')[1])
 
     elif is_pound_decimal:  # e.g. £1.97p, £1.256532677p, etc.
         print(str(copy_input), ' = ', get_coins(round(float(user_input), 2), signal='£')[0])
-        terminal.show_result_table(
+        return terminal.show_result_table(
             user_input=copy_input, data=get_coins(round(float(user_input), 2), signal='£')[1])
 
     elif is_missing_pence:  # e.g. £1.p, £.75p, etc.
         temp_input = round(float(user_input.replace('p', '').replace('£', '')), 2)
         print(str(copy_input), ' = ', get_coins(temp_input, signal='£')[0])
-        terminal.show_result_table(user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
-    else:  # invalid input -> just print 0
-        print(0)
-    print()
+        return terminal.show_result_table(user_input=copy_input, data=get_coins(temp_input, signal='£')[1])
+
+    return print(0)
