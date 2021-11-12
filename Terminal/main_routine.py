@@ -30,6 +30,7 @@ def main():
     validations = MinSterlingUtils.validate_input(user_input=user_input)
     is_pennies, is_pounds, is_pound_pence, is_sing_or_doub, is_pound_decimal, \
         is_missing_pence, is_sing_dig_pound = tuple(validations.values())
+
     user_input = user_input.replace('p', '') if is_pennies else user_input
     cur_pat = "(?:[\£\]{1}[,\d]+.?\d*)"
 
@@ -39,40 +40,42 @@ def main():
             temp_input = round(float(temp_input), 2)
             user_input = '£' + str(temp_input)
             amount = re.search(cur_pat, user_input)[0].replace('£', '')
-            print(str(copy_input), ' = ', MinSterlingUtils.get_coins(temp_input, signal='p')[0])
-            return terminal.show_result_table(  # describe coins in a terminal table
-                user_input=copy_input, data=MinSterlingUtils.get_coins(temp_input, signal='p')[1])
+            min_coins = MinSterlingUtils.get_coins(temp_input, signal='p')  # calculate coins needed
+            print(str(copy_input), ' = ', min_coins[0])  # print one line string of results
+            return terminal.show_result_table(user_input=copy_input, data=min_coins[1])  # tabluate results
 
         elif is_pounds or is_pound_pence:  # e.g. £1.33, 6.235p, 001.61p
-            if '£' in user_input:
+            if '£' in user_input and user_input.count('£') <= 1:
                 temp_input = user_input.replace('£', '').replace('p', '')
                 temp_input = round(float(temp_input), 2)
                 user_input = '£' + str(temp_input)
                 amount = re.search(cur_pat, user_input)[0]
-                print(str(copy_input), ' = ', MinSterlingUtils.get_coins(temp_input, signal='£')[0])
-                return terminal.show_result_table(
-                    user_input=copy_input, data=MinSterlingUtils.get_coins(temp_input, signal='£')[1])
+                min_coins = MinSterlingUtils.get_coins(temp_input, signal='£')
+                print(str(copy_input), ' = ', min_coins[0])
+                return terminal.show_result_table(user_input=copy_input, data=min_coins[1])
             else:  # e.g. 1.97, 10.75, 0.56, etc.
                 temp_input = round(float(user_input.replace('p', '')), 2)
-                print(str(copy_input), ' = ', MinSterlingUtils.get_coins(temp_input, signal='£')[0])
-                return terminal.show_result_table(
-                    user_input=copy_input, data=MinSterlingUtils.get_coins(temp_input, signal='£')[1])
+                min_coins = MinSterlingUtils.get_coins(temp_input, signal='£')
+                print(str(copy_input), ' = ', min_coins[0])
+                return terminal.show_result_table(user_input=copy_input, data=min_coins[1])
 
-        elif is_sing_or_doub:  # ...or more. # e.g. 6, 75, etc.
-            print(str(copy_input), ' = ', MinSterlingUtils.get_coins(int(user_input), signal='p')[0])
-            return terminal.show_result_table(
-                user_input=copy_input, data=MinSterlingUtils.get_coins(int(user_input), signal='p')[1])
+        elif is_sing_or_doub:  # ...or more. # e.g. 6, 75, 139, etc.
+            cur_val = int(user_input)
+            min_coins = MinSterlingUtils.get_coins(cur_val, signal='p')
+            print(str(copy_input), ' = ', min_coins[0])
+            return terminal.show_result_table(user_input=copy_input, data=min_coins[1])
 
-        elif is_pound_decimal:  # e.g. £1.97p, £1.256532677p, etc.
-            print(str(copy_input), ' = ', MinSterlingUtils.get_coins(round(float(user_input), 2), signal='£')[0])
-            return terminal.show_result_table(
-                user_input=copy_input, data=MinSterlingUtils.get_coins(round(float(user_input), 2), signal='£')[1])
+        elif is_pound_decimal and user_input.count('£') <= 1:  # e.g. £1.97p, £1.256532677p, £0.25p, etc.
+            cur_val = round(float(user_input), 2)
+            min_coins = MinSterlingUtils.get_coins(cur_val, signal='£')
+            print(str(copy_input), ' = ', min_coins[0])
+            return terminal.show_result_table(user_input=copy_input, data=min_coins[1])
 
-        elif is_missing_pence:  # e.g. £1.p, £.75p, etc.
+        elif is_missing_pence and user_input.count('£') <= 1:  # e.g. £1.p, £.75p, etc.
             temp_input = round(float(user_input.replace('p', '').replace('£', '')), 2)
-            print(str(copy_input), ' = ', MinSterlingUtils.get_coins(temp_input, signal='£')[0])
-            return terminal.show_result_table(
-                user_input=copy_input, data=MinSterlingUtils.get_coins(temp_input, signal='£')[1])
+            min_coins = MinSterlingUtils.get_coins(temp_input, signal='£')
+            print(str(copy_input), ' = ', min_coins[0])
+            return terminal.show_result_table(user_input=copy_input, data=min_coins[1])
 
         return print(0)  # invalid input -> just print 0
     except Exception:
