@@ -6,6 +6,8 @@
 description:
 \t A shadow of the utils.py file for testing purposes.
 """
+import inspect
+import logging
 import math
 from typing import Union
 
@@ -85,12 +87,16 @@ class MinSterlingUtils:
             if '.' in user_input or '£' in user_input:
                 float(user_input.replace('£', ''))
                 is_pounds = True
-        except Exception:
+        except Exception as e:
+            logging.debug(e,
+                          f": {__file__} > line {inspect.currentframe().f_lineno} > encountered while testing for pounds.")
             is_pounds = False
         try:
             int(user_input.replace('£', ''))
             is_sing_or_doub = True if not is_pennies and '£' not in user_input and not is_pounds else False
-        except Exception:
+        except Exception as e:
+            logging.debug(e,
+                          f": {__file__} > line {inspect.currentframe().f_lineno} > encountered while testing for single/double.")
             is_sing_or_doub = False
         is_missing_pence = True if '£' in user_input and 'p' in user_input and '.' not in user_input else False
         if is_missing_pence:
