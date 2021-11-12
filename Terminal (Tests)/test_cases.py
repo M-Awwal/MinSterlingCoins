@@ -4,7 +4,7 @@
 * program title: test_cases.py
 
 description:
-\t This program performs 24 explicit unit tests with the standard Python Unit testing framework.
+\t This program performs explicit unit tests with the standard Python Unit testing framework.
 \t ALL provided test data (refer to README.md) and additional new cases are tested (test case #18+).
 \t Core functionalities of the main routine are called via test_skeleton.py.
 \t All test calls are invoked free of exception-handling.
@@ -212,6 +212,60 @@ class TestMinSterlingCoin(unittest.TestCase):
         print(f"Input: {test_data}\nExpected Results: {output}")
 
     def test_case_24(self, test_data='£p', output='0'):
+        old_stdout = sys.stdout
+        sys.stdout = buffer = io.StringIO()
+        print(test_skeleton.main(test_data))
+        sys.stdout = old_stdout
+        self.assertTrue(output in buffer.getvalue())
+        self.assertTrue(buffer.getvalue()[0] == output)
+        print(f"Input: {test_data}\nExpected Results: {output}")
+
+    def test_case_25(self, test_data='££2', output='0'):
+        old_stdout = sys.stdout
+        sys.stdout = buffer = io.StringIO()
+        print(test_skeleton.main(test_data))
+        sys.stdout = old_stdout
+        self.assertTrue(output in buffer.getvalue())
+        self.assertTrue(buffer.getvalue()[0] == output)
+        print(f"Input: {test_data}\nExpected Results: {output}")
+
+    def test_case_26(self, test_data='££2££2', output='0'):
+        old_stdout = sys.stdout
+        sys.stdout = buffer = io.StringIO()
+        print(test_skeleton.main(test_data))
+        sys.stdout = old_stdout
+        self.assertTrue(output in buffer.getvalue())
+        self.assertTrue(buffer.getvalue()[0] == output)
+        print(f"Input: {test_data}\nExpected Results: {output}")
+
+    def test_case_27(self, test_data='££2.5', output='0'):
+        old_stdout = sys.stdout
+        sys.stdout = buffer = io.StringIO()
+        print(test_skeleton.main(test_data))
+        sys.stdout = old_stdout
+        self.assertTrue(output in buffer.getvalue())
+        self.assertTrue(buffer.getvalue()[0] == output)
+        print(f"Input: {test_data}\nExpected Results: {output}")
+
+    def test_case_28(self, test_data='££2.5p', output='0'):
+        old_stdout = sys.stdout
+        sys.stdout = buffer = io.StringIO()
+        print(test_skeleton.main(test_data))
+        sys.stdout = old_stdout
+        self.assertTrue(output in buffer.getvalue())
+        self.assertTrue(buffer.getvalue()[0] == output)
+        print(f"Input: {test_data}\nExpected Results: {output}")
+
+    def test_case_29(self, test_data='££25p', output='0'):
+        old_stdout = sys.stdout
+        sys.stdout = buffer = io.StringIO()
+        print(test_skeleton.main(test_data))
+        sys.stdout = old_stdout
+        self.assertTrue(output in buffer.getvalue())
+        self.assertTrue(buffer.getvalue()[0] == output)
+        print(f"Input: {test_data}\nExpected Results: {output}")
+
+    def test_case_30(self, test_data='££2££2p', output='0'):
         old_stdout = sys.stdout
         sys.stdout = buffer = io.StringIO()
         print(test_skeleton.main(test_data))
