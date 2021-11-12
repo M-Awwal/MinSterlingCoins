@@ -26,7 +26,7 @@ class MinSterlingUtils:
         :param cur_val: numeric monetary value corresponding with the user input,
             usually int or float, formatted by the calling program.
         :param signal: pound coin or pennies symbol, allows for specialized arithmetic.
-        :return: a list containing a string (e.g.: "£1.75  =  £1 x 1, 1 x 50p, 1 x 20p, 1 x 5p"),
+        :return: a list containing a string (e.g.: "£1 x 1, 1 x 50p, 1 x 20p, 1 x 5p"),
             and a dictionary (e.g.: {'£1':1, '50p':1, '20p':1, '5p':1}), both describing the minimum coins.
         """
 
