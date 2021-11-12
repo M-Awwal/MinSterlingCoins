@@ -5,7 +5,7 @@
 
 description:
 \t A small class to encapsulate stylish designs and rich text in the terminal.
- \t The idea is to mimic the feel and look of a web application in a console application.
+\t The idea is to mimic the feel and look of a web application in a console application.
 """
 
 from termcolor import colored
@@ -22,20 +22,17 @@ class MinSterlingTerminal:
         pass
 
     def show_welcome_msg(self):
-        """
-        prints a stylized text in the console.
-        :return: None
+        """Prints a stylized text in the console.
         """
         print(colored(self.figlet.renderText('Welcome to Minimum Sterling Coin Evaluator!'), 'green'))
 
     @staticmethod
     def show_result_table(user_input, data):
-        """
-        shows two tables describing coins processed based on input data.
+        """Shows two tables describing coins processed based on input data.
 
-        :param user_input:
-        :param data:
-        :return: None
+        :param user_input: EXACTLY what the user initially typed without being formatted/edited.
+        :param data: a dictionary that indexes the count of each coin produced (e.g. {'£2': 1}).
+        :return: has no retun value, but we print a couple tables based on the params above.
         """
         console = Console()
         table = Table(show_header=True, header_style="bold magenta")
