@@ -57,7 +57,7 @@ class MinSterlingUtils:
         for c in coins:
             if coins[c] != 0:
                 result += str(coins[c]) + ' x ' + c + ', '
-        result = result[:-1] if result.endswith(', ') or result.endswith(',') else result
+        result = result[:-2] if result.endswith(', ') or result.endswith(',') else result
         results = [result, coins]
 
         return results
